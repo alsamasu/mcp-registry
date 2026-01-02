@@ -12,7 +12,7 @@ about:
 source:
   project: https://github.com/domdomegg/airtable-mcp-server
   branch: master
-  commit: e6ab2431b144865e403976d50549dfafd7be7283
+  commit: 3069efccf2d1acb40ad1109f95ea5fca82473f8e
 config:
   description: Configure the connection to Airtable mcp server
   secrets:
