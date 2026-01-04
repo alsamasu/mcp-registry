@@ -1,0 +1,98 @@
+name: phpipam-mcp
+image: mcp/phpipam-mcp
+type: server
+meta:
+  category: network
+  tags:
+    - phpipam
+    - ipam
+    - network
+    - ip-management
+about:
+  title: phpIPAM
+  description: Connect to phpIPAM to manage IP addresses, subnets, and network sections. Supports API token and username/password authentication with configurable write operations and safety toggles.
+  icon: https://avatars.githubusercontent.com/u/182288589?s=200&v=4
+source:
+  project: https://github.com/alsamasu/phpipam-mcp
+  branch: v0.1.0
+  commit: aa17956a8f3c8e2b7d1a4f6e0c5b8d2a7f1e4c9b
+config:
+  description: Configure connection to your phpIPAM instance
+  secrets:
+    - name: phpipam-mcp.token
+      env: PHPIPAM_TOKEN
+      example: your-api-token
+    - name: phpipam-mcp.password
+      env: PHPIPAM_PASSWORD
+      example: your-password
+  env:
+    - name: PHPIPAM_BASE_URL
+      example: https://phpipam.example.com
+      value: "{{phpipam-mcp.base_url}}"
+    - name: PHPIPAM_APP_ID
+      example: myapp
+      value: "{{phpipam-mcp.app_id}}"
+    - name: PHPIPAM_AUTH_MODE
+      example: auto
+      value: "{{phpipam-mcp.auth_mode}}"
+    - name: PHPIPAM_USERNAME
+      example: admin
+      value: "{{phpipam-mcp.username}}"
+    - name: PHPIPAM_WRITE_ENABLED
+      example: "false"
+      value: "{{phpipam-mcp.write_enabled}}"
+    - name: PHPIPAM_VERIFY_TLS
+      example: "true"
+      value: "{{phpipam-mcp.verify_tls}}"
+    - name: PHPIPAM_ENABLE_CACHE
+      example: "false"
+      value: "{{phpipam-mcp.enable_cache}}"
+    - name: PHPIPAM_DEBUG_HTTP
+      example: "false"
+      value: "{{phpipam-mcp.debug_http}}"
+    - name: PHPIPAM_ALLOW_SUBNET_CREATE
+      example: "false"
+      value: "{{phpipam-mcp.allow_subnet_create}}"
+    - name: PHPIPAM_ALLOW_SECTION_CREATE
+      example: "false"
+      value: "{{phpipam-mcp.allow_section_create}}"
+  parameters:
+    type: object
+    properties:
+      base_url:
+        type: string
+        description: Base URL of your phpIPAM instance
+      app_id:
+        type: string
+        description: API application ID
+      auth_mode:
+        type: string
+        description: Authentication mode (token, password, or auto)
+        enum:
+          - token
+          - password
+          - auto
+      username:
+        type: string
+        description: Username for password authentication
+      write_enabled:
+        type: boolean
+        description: Enable write operations (allocate, release, upsert)
+      verify_tls:
+        type: boolean
+        description: Verify TLS certificates
+      enable_cache:
+        type: boolean
+        description: Enable response caching
+      debug_http:
+        type: boolean
+        description: Enable HTTP debug logging
+      allow_subnet_create:
+        type: boolean
+        description: Allow subnet creation
+      allow_section_create:
+        type: boolean
+        description: Allow section creation
+    required:
+      - base_url
+      - app_id
